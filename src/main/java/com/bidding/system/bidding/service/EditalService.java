@@ -54,9 +54,13 @@ public class EditalService {
             }
     }
     
-    public List<EditalDTO> ler(String token){
-        UserDTO userLogado = tokenService.extrairClaim(token);
-        return repository.ler();
+    public List<EditalDTO> listarEditais(String token){
+        if(tokenService.validarToken(token)){
+            return repository.listar();
+        } else{
+            throw new ResponseStatusException(HttpStatusCode.valueOf(401), "Necessário logar com conta válida");
+        }
+        
     }
 
 }

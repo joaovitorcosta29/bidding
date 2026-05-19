@@ -19,7 +19,7 @@ public class LanceDTO {
 
     public LanceDTO() {
     }
-
+    
     public LanceDTO(Long id, Double valor, Date dataLance, Long idEdital, Long idUsuario) {
         this.id = id;
         this.valor = valor;

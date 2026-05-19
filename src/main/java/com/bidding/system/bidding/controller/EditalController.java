@@ -12,6 +12,7 @@ import com.bidding.system.bidding.service.TokenService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -42,15 +43,15 @@ public class EditalController {
     }
     
     @GetMapping
-    public List<EditalDTO> ler(@RequestHeader("Authorization") String auth){
+    public List<EditalDTO> listarEditais(@RequestHeader("Authorization") String auth){
         String token = auth.replace("Bearer ", "");
-        return service.ler(token);
+        return service.listarEditais(token);
     }
     
     @PostMapping("/{id}/lances")
-    public String criarLance(@RequestHeader("Authorization") String auth, @RequestBody LanceDTO lance){
+    public String criarLance(@RequestHeader("Authorization") String auth, @RequestBody LanceDTO lance, @PathVariable Long id){
         String token = auth.replace("Bearer ", "");
-        lanceService.criarLance(lance, token);
+        lanceService.criarLance(id, lance, token);
         return "Lance Cadastrado com sucesso!";
     }
 }
